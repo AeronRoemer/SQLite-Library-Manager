@@ -22,9 +22,13 @@ const books = await Books.findAll();
 
 //new book render
 router.get('/new_book', (req, res) =>{
-        res.render('new_book')
+        res.render('new_book', {book: Books.build()})
     })
     
-
+//new book post
+router.post('/', asyncHandler(async (req, res) =>{
+    console.log(req.body)
+    Books.create(req.body).then(res.redirect('/'))
+    }))
 
 module.exports = router

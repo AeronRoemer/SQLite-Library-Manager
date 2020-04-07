@@ -2,6 +2,7 @@ const express = require('express');
 var sequelize = require("./models").sequelize;
 const Book = require('./models').Book;
 const routes = require('./routes');
+const bodyParser = require('body-parser');
 
 //set up all views in pug
 //set up new book edit book
@@ -15,11 +16,13 @@ const routes = require('./routes');
 const app = express();
 //sets the view engine as pug for render requests
 app.set('view engine', 'pug');
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // does not support encoded bodies
+
 //serve static files (CSS)
 app.use('/static', express.static('public/stylesheets'));
-//links route for main
-app.use(routes)
 
+app.use('/', routes); //uses 'routes/index.js'
 
 //creates error
 app.use((req, res, next)=>{
