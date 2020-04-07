@@ -2,17 +2,19 @@ extends layout.pug
 
 block content
   section#content
-    h1 "Text Content"
+    h1 Book
+    p
+      a(class="button" href="/new_book") Create New Book
   table
     tr
-      th "Title"
-      th "Author"
-      th "Genre"
-      th "Year"
+      th Title
+      th Author
+      th Genre
+      th Year
     each book in books
-      book
       tr
-        td= book.title
+        td
+          a(href= "/books/" + book.id)=book.title
         td= book.author
         td= book.genre
         td= book.year

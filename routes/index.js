@@ -20,5 +20,11 @@ const books = await Books.findAll();
     res.render('books', { books })
 }))
 
+//new book render
+router.get('/new_book', (req, res) =>{
+        res.render('new_book')
+    })
+    
+
 
 module.exports = router
