@@ -3,7 +3,8 @@ extends layout.pug
 block content
   section#content
   h1 New Book
-  form(action="/", method="post")
+  include errors
+  form(action="/new_book", method="post")
     p
       label(for="title") Title
       input(id="title" name="title" type="text")

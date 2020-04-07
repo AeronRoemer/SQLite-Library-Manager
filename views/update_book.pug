@@ -3,6 +3,7 @@ extends layout.pug
 block content
   section#content
   h1 Update Book
+  include errors
   form(action="/update_book/" + book.id , method="post")
     p
       label(for="title") Title

@@ -4,10 +4,7 @@ const Book = require('./models').Book;
 const routes = require('./routes');
 const bodyParser = require('body-parser');
 
-//set up all views in pug
-//set up new book edit book
 //validation
-//404 route
 //create search function
 //integrate serach function
 //css improvements
@@ -41,31 +38,6 @@ app.use(( err, req, res, next ) => {
   res.render('404NoFound');
 });
 
-  
-//   (async () => {
-//     //Movie.sync() synchronizes table from db, sequelize.sync() does all
-//     await sequelize.sync( 
-//         //force completely drops & recreates table each time
-//         { force: true } );
-//   try{
-//     // Instance of the Movie class represents a database row
-//     const book = await Book.create({
-//         title: "A Brief History of Time",
-//         author: "Stephen Hawking",
-//         genre: "Non Fiction",
-//         year: 1988
-//     })
-//     await Book.create({
-//         title: "Armada",
-//         author: "Ernest Cline",
-//         genre: "Science Fiction",
-//         year: 2015
-//     })
-//   } catch(error){
-//     console.error("Database error: ", error)
-//   }
-
-// })();
 //starts listening on specfied port(localhost:3000). Server must be started with node app.js in terminal
 sequelize.sync().then(app.listen(3000, () =>{
     console.log('The server is up and running')
