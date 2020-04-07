@@ -22,13 +22,35 @@ const books = await Books.findAll();
 
 //new book render
 router.get('/new_book', (req, res) =>{
-        res.render('new_book', {book: Books.build()})
+        res.render('new_book')
     })
     
 //new book post
 router.post('/', asyncHandler(async (req, res) =>{
-    console.log(req.body)
-    Books.create(req.body).then(res.redirect('/'))
+    await Books.create(req.body);
+    res.redirect('/')
     }))
+
+//update book render
+router.get('/update_book/:id', asyncHandler(async (req, res) =>{
+    const book = await Books.findByPk(req.params.id)
+    res.render('update_book', {book})
+}))
+
+//update book post
+router.post('/update_book/:id', asyncHandler(async (req, res) =>{
+    book = await Books.findByPk(req.params.id);
+    await book.update(req.body);
+    res.redirect('/');
+}))
+
+//delete book post
+router.post('/update_book/:id/delete', asyncHandler(async (req, res) =>{
+    book = await Books.findByPk(req.params.id);
+    console.log(book);
+    await book.destroy();
+    res.redirect('/');
+}))
+
 
 module.exports = router
