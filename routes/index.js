@@ -1,6 +1,8 @@
 
 const express = require('express');
 const router = express.Router();
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 const Books = require('../models').Book
 
 /* Handler function to wrap each route. */
@@ -19,6 +21,21 @@ router.get('/', asyncHandler(async (req, res) =>{
 const books = await Books.findAll();
     res.render('books', { books })
 }))
+
+//home page search
+router.get('/search_results', asyncHandler(async (req, res) =>{
+    const searchTerm = req.query.query
+    const books = await Books.findAll({where: 
+      { title:
+      { [Op.like] : '%' + searchTerm + '%'}}
+    });
+     if(books) {
+      res.render('search_results', { books })
+     } else {
+      res.render('no_results')
+     }
+    
+    }))
 
 //new book render
 router.get('/new_book', (req, res) =>{
@@ -60,6 +77,8 @@ router.post('/update_book/:id/delete', asyncHandler(async (req, res) =>{
         await book.destroy();
         res.redirect("/");
       } else {
+          //if being directed to update page from A new book missing a title,
+          // 'delete' will actually redirect to home since no book was actually created
         res.redirect("/");
       }
 }))
