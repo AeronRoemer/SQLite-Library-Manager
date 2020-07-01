@@ -2,7 +2,11 @@ body {
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
 }
-
+.header{
+  display: flex;
+  padding: 10px;
+  flex-wrap: nowrap;
+}
 a {
   color: #019875;
   text-decoration: none;

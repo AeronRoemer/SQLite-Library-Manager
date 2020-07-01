@@ -19,23 +19,36 @@ function asyncHandler(cb){
 //home page render
 router.get('/', asyncHandler(async (req, res) =>{
 const books = await Books.findAll();
+console.log(books)
     res.render('books', { books })
 }))
 
-//home page search
+//book search
 router.get('/search_results', asyncHandler(async (req, res) =>{
-    const searchTerm = req.query.query
-    const books = await Books.findAll({where: 
-      { title:
-      { [Op.like] : '%' + searchTerm + '%'}}
-    });
-     if(books) {
-      res.render('search_results', { books })
-     } else {
-      res.render('no_results')
-     }
-    
-    }))
+    const search = req.query.query
+
+    const books = await Books.findAll({
+      where: {
+        [Op.or]: [
+            {title: { [Op.like]: `%${search}%` }},
+            {author: { [Op.like]: `%${search}%` }},
+            {genre: { [Op.like]: `%${search}%` }},
+            {year: { [Op.like]: `%${search}%` }}
+        ]
+    }
+    }).catch(function(error){
+      res.status.send(500, error)
+      console.log(error.message)})
+      .then((books)=>{
+        console.log(books)
+        if(books.length > 0) {
+          res.render('search_results', { books })
+         } else {
+          res.render('no_results')
+         }
+      })
+
+     }))
 
 //new book render
 router.get('/new_book', (req, res) =>{

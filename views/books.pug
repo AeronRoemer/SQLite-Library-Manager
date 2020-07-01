@@ -2,14 +2,7 @@ extends layout.pug
 
 block content
   section#content
-    h1 Book
-    p
-     form(action="/search_results" method="get")
-      p
-        input(id="query" name="query" type="search" value="Title, Author, etc.")
-        input(type="submit" value='Search')
-    p
-      a(class="button" href="/new_book") Create New Book
+
   table
     tr
       th Title
