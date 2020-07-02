@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const Sequelize = require('sequelize')
@@ -19,7 +18,6 @@ function asyncHandler(cb){
 //home page render
 router.get('/', asyncHandler(async (req, res) =>{
 const books = await Books.findAll();
-console.log(books)
     res.render('books', { books })
 }))
 
@@ -36,11 +34,7 @@ router.get('/search_results', asyncHandler(async (req, res) =>{
             {year: { [Op.like]: `%${search}%` }}
         ]
     }
-    }).catch(function(error){
-      res.status.send(500, error)
-      console.log(error.message)})
-      .then((books)=>{
-        console.log(books)
+    }).then((books)=>{
         if(books.length > 0) {
           res.render('search_results', { books })
          } else {
@@ -91,7 +85,7 @@ router.post('/update_book/:id/delete', asyncHandler(async (req, res) =>{
         res.redirect("/");
       } else {
           //if being directed to update page from A new book missing a title,
-          // 'delete' will actually redirect to home since no book was actually created
+         // 'delete' will actually redirect to home since no book was actually created
         res.redirect("/");
       }
 }))

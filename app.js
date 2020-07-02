@@ -4,8 +4,7 @@ const Book = require('./models').Book;
 const routes = require('./routes');
 const bodyParser = require('body-parser');
 
-//create search function
-//integrate serach function
+//language function
 //css improvements
 //a11y check
 

@@ -2,22 +2,23 @@ extends layout.pug
 
 block content
   section#content
-  h1 New Book
-  include errors
-  form(action="/new_book", method="post")
-    p
-      label(for="title") Title
-      input(id="title" name="title" type="text")
-    p
-      label(for="author") Author
-      input(id="author" name="author" type="text")
-    p
-      label(for="genre") Genre
-      input(id="genre" name="genre" type="text")
-    p
-      label(for="year") Year
-      input(id="year" name="year" type="text")
-    p
-      input(type="submit" value='Create New Book')
-    p
-      a(class="button" href="/") Cancel
+  div.book-form-container
+    h1 New Book
+    include errors
+    form.book-form(action="/new_book", method="post")
+      p
+        label(for="title") Title
+        input(id="title" name="title" type="text")
+      p
+        label(for="author") Author
+        input(id="author" name="author" type="text")
+      p
+        label(for="genre") Genre
+        input(id="genre" name="genre" type="text")
+      p
+        label(for="year") Year
+        input(id="year" name="year" type="text")
+      p
+        input(type="submit" value='Create New Book')
+      p
+        a(class="button" href="/") Cancel

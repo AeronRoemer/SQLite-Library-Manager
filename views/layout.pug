@@ -2,14 +2,14 @@ doctype html
 html
   head
     title #{title}
-    link(rel='stylesheet', href='/static/style.css')
+    link(rel='stylesheet', href='/static/new-style.css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
     body
       main
         block header
         div.header
           header.header
-            h1 Books
+            h1.header-title Books
             div.search-form
               form(action="/search_results" method="get")
                 p
@@ -18,5 +18,5 @@ html
               div.create-new
                 a(class="button" href="/new_book") Create New Book
     block content
-  footer
+  footer.footer
    p Sequelize/Express Based Library Site.

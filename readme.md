@@ -7,19 +7,31 @@ It was based on a TeamTreehouse.com project, but the code is my own.
 ## Concepts Demonstrated
 
 The main technologies and concepts demonstrated in this project are
-* Pug
+* Pug 
 * Express 
 * SQLite
 * Sequelize
 * Javascript
 * Node.js
-* API Calls
+* REST API
 * Responsive Design
+* SASS
 * CRUD
 
-### React-Bootstrap Framework
+## PUG
 
-Using both the React-Bootstrap and Bootstrap libraries, these framworks sped up styling on the project. 
+Pages are templated in PUG - foremerly JADE. 
+
+## Express
+
+Express used for routing, details on individual routes found in routes/index.js. 
+
+## SQLite & Sequelize 
+The SQLite database is used in conjunction with Sequelize: https://sequelize.org/.
+
+
+## REST API 
+
 
 * Bootstrap Grid on Search Form and Nav Bar.
 * Flexbox Gallery display.

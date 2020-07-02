@@ -1,0 +1,43 @@
+html {
+  font-size: 62.5%;
+}
+
+.header {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.header-title {
+  margin-right: auto;
+  text-transform: uppercase;
+}
+
+.book-results {
+  margin: 0 auto;
+}
+
+.book-form-container {
+  width: 50rem;
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+  background-color: lightgrey;
+}
+
+.book-form {
+  display: block;
+  margin: 0 auto;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 0.6rem;
+}
+
+/*# sourceMappingURL=new-style.css.map */
