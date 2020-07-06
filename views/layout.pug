@@ -2,21 +2,23 @@ doctype html
 html
   head
     title #{title}
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
     link(rel='stylesheet', href='/static/new-style.css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
     body
       main
         block header
-        div.header
-          header.header
-            h1.header-title Books
-            div.search-form
-              form(action="/search_results" method="get")
-                p
+        header
+          div.header
+              h1.header-title bookSearch
+              div.search-form
+                form(action="/search_results" method="get" class="search")
                   input(id="query" name="query" type="search" value="Title, Author, etc.")
-                  input(type="submit" value='Search')
-              div.create-new
-                a(class="button" href="/new_book") Create New Book
+                  button(type="submit")
+                    i.fa.fa-search  
+                div.create-new
+                  button
+                    a(href="/new_book") Create New Book
     block content
   footer.footer
    p Sequelize/Express Based Library Site.

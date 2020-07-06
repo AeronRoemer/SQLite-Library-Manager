@@ -1,5 +1,5 @@
 const express = require('express');
-var sequelize = require("./models").sequelize;
+const sequelize = require("./models").sequelize;
 const Book = require('./models').Book;
 const routes = require('./routes');
 const bodyParser = require('body-parser');
