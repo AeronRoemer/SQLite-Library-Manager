@@ -12,18 +12,8 @@ body {
   margin: 0;
   box-sizing: border-box;
   font-size: 1.5rem;
-}
-
-h1 {
-  font-size: 5rem;
-}
-
-table {
-  border: 1px solid black;
-}
-table th {
-  font-size: 3rem;
-  background-color: antiquewhite;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 button {
@@ -31,9 +21,6 @@ button {
   border: none;
   padding: 3px;
   border-radius: 3px;
-}
-button:hover {
-  box-shadow: 1rem 1rem 1rem rgba(0, 0, 0, 0.3);
 }
 
 .header {
@@ -44,14 +31,14 @@ button:hover {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  border: 1px solid black;
 }
 .header-title {
   font-size: 5rem;
   padding: 2rem;
   margin-left: 5rem;
   margin-right: auto;
-  font-family: "Poiret One", sans-serif;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 600;
 }
 .header button {
   font-size: 2rem;
@@ -76,13 +63,43 @@ button:hover {
   height: 3rem;
 }
 
+h1 {
+  font-size: 5rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 300;
+}
+
 .content {
   display: block;
   margin: 0 auto;
 }
 
+.results {
+  text-align: left;
+}
+
 .book-results {
   margin: 0 auto;
+  width: 80%;
+}
+
+table {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+table thead {
+  padding: 0.7rem;
+  font-size: 3rem;
+  background: #36304a;
+  color: white;
+  margin-bottom: 1rem;
+}
+table tbody tr:nth-child(odd) {
+  background-color: whitesmoke;
 }
 
 .book-form-container {
@@ -90,18 +107,27 @@ button:hover {
   display: block;
   margin: 0 auto;
   border-radius: 5px;
-  background-color: lightgrey;
+  background-color: #f5f4f4;
 }
 
 .book-form {
   display: block;
   margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
 }
 
-.footer {
+.no-results {
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+}
+
+footer {
+  background-color: antiquewhite;
   display: flex;
   justify-content: space-evenly;
-  font-size: 0.6rem;
+  font-size: 1rem;
 }
 
 /*# sourceMappingURL=new-style.css.map */

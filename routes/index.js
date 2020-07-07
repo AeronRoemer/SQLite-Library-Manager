@@ -24,7 +24,7 @@ const books = await Books.findAll();
 //book search
 router.get('/search_results', asyncHandler(async (req, res) =>{
     const search = req.query.query
-
+    const header = "Search Results: "
     const books = await Books.findAll({
       where: {
         [Op.or]: [
@@ -36,7 +36,7 @@ router.get('/search_results', asyncHandler(async (req, res) =>{
     }
     }).then((books)=>{
         if(books.length > 0) {
-          res.render('search_results', { books })
+          res.render('books', { books, header })
          } else {
           res.render('no_results')
          }
@@ -46,6 +46,7 @@ router.get('/search_results', asyncHandler(async (req, res) =>{
 
 //new book render
 router.get('/new_book', (req, res) =>{
+  const bookAction = "Create New Book"
         res.render('new_book')
     })
     
@@ -67,6 +68,7 @@ router.post('/new_book', asyncHandler(async (req, res) =>{
 //update book render
 router.get('/update_book/:id', asyncHandler(async (req, res) =>{
     const book = await Books.findByPk(req.params.id)
+    const bookAction = "Update Book"
     res.render('update_book', {book})
 }))
 
