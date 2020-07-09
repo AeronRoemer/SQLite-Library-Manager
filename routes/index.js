@@ -23,8 +23,9 @@ const books = await Books.findAll();
 
 //book search
 router.get('/search_results', asyncHandler(async (req, res) =>{
-    const search = req.query.query
-    const header = "Search Results: "
+    const search = req.query.query.trim()
+    const searchPhrase = ` for '${search}'`;
+    const header = "Search Results"
     const books = await Books.findAll({
       where: {
         [Op.or]: [
@@ -36,9 +37,9 @@ router.get('/search_results', asyncHandler(async (req, res) =>{
     }
     }).then((books)=>{
         if(books.length > 0) {
-          res.render('books', { books, header })
+          res.render('books', { books, header, searchPhrase })
          } else {
-          res.render('no_results')
+          res.render('no_results', {search})
          }
       })
 

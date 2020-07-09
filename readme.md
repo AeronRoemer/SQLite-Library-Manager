@@ -2,6 +2,18 @@
 
 This project combines React and Bootstrap to make a simple gallery display.  
 
+## APPLICATION SETUP
+The 'Library of Unreal Books' is a web application that runs SQLite database. Upon loading, it executes a query for all the books in the library, which are then displayed.The header contains a search bar as well as a link to the 'Create New Book' page. 
+![test link](./##SASS)
+The table display links to update pages for all the books which have already been created, 
+following these links takes the user to a form where updates can be performed. 
+<br />
+In addition to these main pages, there is a 404 error page, a general error page and a 'No Results' page. 
+
+| Partial Query: |
+| -- |
+| ![results deliviered from a partial query](/example-img/full-view.png) |
+
 It was based on a TeamTreehouse.com project, but the code is my own. 
 
 ## Concepts Demonstrated
@@ -20,18 +32,49 @@ The main technologies and concepts demonstrated in this project are
 
 ## PUG
 
-Pages are templated in PUG - foremerly JADE. 
+Pages are templated in PUG - foremerly JADE. The site displays a main 'layout' view that contains the header (title and search functions) and footer. Content is broken up into a number of other views that can be found in the /views folder. 
 
 ## Express
 
-Express used for routing, details on individual routes found in routes/index.js. 
+Express used for routing, details on individual routes found in routes/index.js. Express routes handle PUG templating, makes queries to database to obtain book information. 
 
 ## SQLite & Sequelize 
-The SQLite database is used in conjunction with Sequelize: https://sequelize.org/.
+- Why SQLite? 
+SQLite is ideal since it is a light, serverless application. It works well for this application, which is intended to be downloaded and used by a single user who manages the library. The number of data types is limited in this application and works well with what is available in SQLite. 
+The SQLite database is located in library.db
 
+The database setup is simple, with no relations between tables. One model is defined with Sequelize, the 'Book' model which can be viewed in the /models/ folder. Sequqlize is used in retrieving data and building out the search functionality. 
+
+### Search Functionality
+```Books.findAll({
+      where: {
+        [Op.or]: [
+            {title: { [Op.like]: `%${search}%` }},
+            {author: { [Op.like]: `%${search}%` }},
+            {genre: { [Op.like]: `%${search}%` }},
+            {year: { [Op.like]: `%${search}%` }}
+        ]
+    }})
+```
+The search returns results from all fields, and trims out whitespace. Some examples of this can be seen below:
+| Partial Query: |
+| -- |
+| ![results deliviered from a partial query](/example-img/results-partial.png) |
+| Case Insensitive: |
+| -- |
+| ![results deliviered from a fully capitalized query](/example-img/results-case-insensitive.png) |
+| Year: |
+| -- |
+| ![results deliviered from searching the 'year' field](/example-img/results-year.png) |
+
+### Update Book Search
+The 'Update Book' pages are rendered through a query to the database to the individual book. Were the book just to be viewed, .filter() might be considered, but since the option to update is allowed the data is populated by a .findByPk() request.
 
 ## REST API 
 
+
+## SASS  
+The search button is inspired by Anh's 'command' button https://twitter.com/pwign
 
 * Bootstrap Grid on Search Form and Nav Bar.
 * Flexbox Gallery display.
@@ -46,60 +89,16 @@ Using built in grid systems, flexbox, default Bootstrap styles and utility class
 | ![React Flickr App as seen on Tablet](/img/Tablet.png) | ![React Flickr App as seen on Mobile](/img/Mobile.png) |
 
 
-### React Router
-
-Used Routes, Links, and NavLinks to create navigation around the site. 
-* The main App.js employs a Switch and Routes to navigate through the content. 
-* The top tag routes are created by using params, and change along with the tags. 
-* The Search Bar redirects the user to a /search/ URL on click.
-* 404 route displays for nonexistent routes.
-
-In the future, I would like to add routes based on location.search data and query strings. Some commented out code is at the bottom of App.js and SearchForm.js. Ideally, the site and results can be accessed directly via a URL ending in a query string. 
-
-## React Router
-
-Used Routes, Links, and NavLinks to create navigation around the site. 
-* The main App.js employs a Switch and Routes to navigate through the content. 
-* The top tag routes are created by using params, and change along with the tags. See NavBar.js and App.js to check this out.  
-* The Search Bar redirects the user to a /search/ URL on click.
-* 404 route displays for nonexistent routes.
-
-In the future, I would like to add routes based on location.search data and query strings. Some commented out code is at the bottom of App.js and SearchForm.js. Ideally, the site and results can be accessed directly via a URL ending in a query string. 
-
 ## No Github Pages?
 
-That's right - the project depends on a config.js file that's ignored in .gitignore. It contains my flickr API key, which I don't want to give out publically. 
+That's right - the project depends on a database file that's installed locally (library.db). <br />
 
-If you want to run the project, you can download it and supply your own key. Config.js just needs to export the API key, which is imported on line 10 of App.js
+If you want to run the project, you can download it quicly and try it out, otherwise all the code can be browsed here on GitHub. 
 
-Just use the following scripts:
+### Running the Application
 
-### Available Scripts
+Once the project files are downloaded, the user should run ```npm install``` followed by ```npm start``` to launch the application. <br />
+It can the be viewed in the browser at [http://localhost:3000](http://localhost:3000).
 
-In the project directory, you can run:
-
-#### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-#### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-#### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### Licsence 
+### Liscence 
 MIT
