@@ -10,7 +10,7 @@ following these links takes the user to a form where updates can be performed.
 <br />
 In addition to these main pages, there is a 404 error page, a general error page and a 'No Results' page. 
 
-| Partial Query: |
+| Main Page |
 | -- |
 | ![results deliviered from a partial query](/example-img/full-view.png) |
 
@@ -18,34 +18,24 @@ It was based on a TeamTreehouse.com project, but the code is my own.
 
 ## Concepts Demonstrated
 
-The main technologies and concepts demonstrated in this project are
-* Pug 
-* Express 
+The main technologies and concepts demonstrated in this project are:
+
 * SQLite
 * Sequelize
+* REST API
+* Express 
+* Pug/HTML5
+* SASS/CSS3
+* Responsive Design
 * Javascript
 * Node.js
-* REST API
-* Responsive Design
-* SASS
-* CRUD
 
-## PUG
-
-Pages are templated in PUG - foremerly JADE. The site displays a main 'layout' view that contains the header (title and search functions) and footer. Content is broken up into a number of other views that can be found in the /views folder. 
-
-## Express
-
-Express used for routing, details on individual routes found in routes/index.js. Express routes handle PUG templating, makes queries to database to obtain book information. 
 
 ## SQLite & Sequelize 
 - Why SQLite? 
-SQLite is ideal since it is a light, serverless application. It works well for this application, which is intended to be downloaded and used by a single user who manages the library. The number of data types is limited in this application and works well with what is available in SQLite. 
-The SQLite database is located in library.db
-
-The database setup is simple, with no relations between tables. One model is defined with Sequelize, the 'Book' model which can be viewed in the /models/ folder. Sequqlize is used in retrieving data and building out the search functionality. 
-
-### Search Functionality
+SQLite is ideal since it is a light, serverless application. It works well for this application, which is intended to be downloaded and used by a single user who manages the library. The number of data types is limited in this application and works well with what is available in SQLite. <br />
+The SQLite database is located in library.db <br />
+The database setup is simple, with no relations between tables. One model is defined with Sequelize, the 'Book' model which can be viewed in the /models/ folder. Sequelize is used in retrieving data and building out the search functionality, for example:
 ```Books.findAll({
       where: {
         [Op.or]: [
@@ -56,37 +46,65 @@ The database setup is simple, with no relations between tables. One model is def
         ]
     }})
 ```
+<br />
+The 'Update Book' pages are rendered through a query to the database to the individual book. Were the book just to be viewed, .filter() might be considered, but since the option to update is allowed the data is populated by a .findByPk() request.
+
+## Pug Templating
+
+Pages are templated in Pug - foremerly JADE.
+Advantages of PUG include 
+- Prevents Header HTML from getting re-written for various pages. 
+- Allows use of varaiables in views files, streamlining code when results are delivered. 
+
+## REST
+The library application is an example of a REST API, all data is returned in JSON format. 
+Endpoints return information from the SQLite database. More details on the functionality of some of these endpoints can be found below. 
+
+## CRUD Operations
+
+Routes found in the /routes/index.js file allow the user to
+- Create Books
+- Read from database in search or in full from home route
+- Update books
+- Destroy books
+
+#### READ - Homepage & Search Functionality
+The homepage renders a table populated with data returned from a database query. 
+<br />
 The search returns results from all fields, and trims out whitespace. Some examples of this can be seen below:
 | Partial Query: |
 | -- |
 | ![results deliviered from a partial query](/example-img/results-partial.png) |
 | Case Insensitive: |
-| -- |
 | ![results deliviered from a fully capitalized query](/example-img/results-case-insensitive.png) |
 | Year: |
-| -- |
 | ![results deliviered from searching the 'year' field](/example-img/results-year.png) |
 
-### Update Book Search
-The 'Update Book' pages are rendered through a query to the database to the individual book. Were the book just to be viewed, .filter() might be considered, but since the option to update is allowed the data is populated by a .findByPk() request.
+#### UPDATE/DESTROY - Update Book Page
+The 'Update Book' form also has an option to destroy the book that already exists. To see the full code, visit /routes/index.js
+| Update Book |
+| ![Update/Destory Page](/example-img/update-form.png) |
 
-## REST API 
+#### CREATE
+The 'Create New Book' page allows the user to submit a new entry to the database. 
+| New Book |
+| ![Create New Book Page](/example-img/new-form.png) |
 
+###  Express
+Express is used for routing, details on individual routes found in routes/index.js. Express routes handle CRUD operations and render the various views required by each route. 
 
-## SASS  
-The search button is inspired by Anh's 'command' button https://twitter.com/pwign
+## SASS & CSS
+The CSS for this project was created in SASS, a CSS preprocessor. Extensive CSS styling on this project was limited, due to the fact that it is not hosted on GitHub pages. 
+<br />
+The design is responsive, using flexbox and a media query to offer different layouts depending on screen size. 
 
-* Bootstrap Grid on Search Form and Nav Bar.
-* Flexbox Gallery display.
-
-Using built in grid systems, flexbox, default Bootstrap styles and utility classes, it allowed for a quick, clean setup of the Photo App for multiple sized devices. I wrote some custom HTML because the Bootstrap margin options weren't the fastest option for a project of this small scale. 
 | Desktop |
 | -- |
-| ![React Flickr App as seen on desktop](/img/Desktop.png) |
+| ![Library App as seen on desktop](/img/full-view.png) |
 
-| Tablet| Mobile |
+| Desktop| Mobile |
 | --- | --- |
-| ![React Flickr App as seen on Tablet](/img/Tablet.png) | ![React Flickr App as seen on Mobile](/img/Mobile.png) |
+| ![Library App as seen on desktop](/img/full-view.png) | ![Library App as seen on mobile](/img/mobile-view.png) |
 
 
 ## No Github Pages?
